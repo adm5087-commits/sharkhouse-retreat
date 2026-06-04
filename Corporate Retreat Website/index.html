@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sharkhouse 2026 — A.D. Moyer Retreat</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --sand: #f7f2e8;
+    --sand-dark: #ede5d0;
+    --ink: #1c1a16;
+    --ink-light: #5a5448;
+    --ocean: #2b5f75;
+    --ocean-light: #4a8fa8;
+    --coral: #c4614a;
+    --gold: #b8922a;
+    --rule: #d4c9b0;
+    --white: #ffffff;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: var(--ocean);
+    font-family: 'Jost', sans-serif;
+    color: var(--white);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+  }
+
+  body::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(ellipse at 15% 85%, rgba(74,143,168,0.45) 0%, transparent 55%),
+      radial-gradient(ellipse at 85% 15%, rgba(27,60,75,0.7) 0%, transparent 55%),
+      radial-gradient(ellipse at 50% 50%, rgba(43,95,117,0.3) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  /* wave decoration */
+  .wave-top, .wave-bottom {
+    position: absolute;
+    left: 0; right: 0;
+    pointer-events: none;
+    opacity: 0.12;
+  }
+  .wave-top { top: 0; }
+  .wave-bottom { bottom: 0; transform: rotate(180deg); }
+
+  .container {
+    position: relative;
+    z-index: 1;
+    text-align: center;
+    padding: 40px 24px;
+    max-width: 560px;
+    width: 100%;
+  }
+
+  .eyebrow {
+    font-size: 0.65rem;
+    font-weight: 600;
+    letter-spacing: 5px;
+    text-transform: uppercase;
+    opacity: 0.6;
+    margin-bottom: 24px;
+  }
+
+  .title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(3.8rem, 12vw, 7rem);
+    font-weight: 300;
+    line-height: 0.88;
+    letter-spacing: -2px;
+    margin-bottom: 6px;
+  }
+
+  .title em {
+    font-style: italic;
+    color: rgba(255,255,255,0.65);
+  }
+
+  .subtitle {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.25rem;
+    font-weight: 300;
+    opacity: 0.75;
+    margin-bottom: 10px;
+    letter-spacing: 0.5px;
+  }
+
+  .dates {
+    font-size: 0.68rem;
+    font-weight: 500;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    opacity: 0.5;
+    margin-bottom: 56px;
+  }
+
+  .rule {
+    width: 40px;
+    height: 1px;
+    background: rgba(255,255,255,0.3);
+    margin: 0 auto 52px;
+  }
+
+  .buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    width: 100%;
+    max-width: 340px;
+    margin: 0 auto;
+  }
+
+  .btn {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px 28px;
+    border-radius: 4px;
+    text-decoration: none;
+    font-family: 'Jost', sans-serif;
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    transition: transform 0.18s ease, box-shadow 0.18s ease, background 0.18s ease;
+    cursor: pointer;
+  }
+
+  .btn-primary {
+    background: var(--white);
+    color: var(--ocean);
+    box-shadow: 0 4px 24px rgba(0,0,0,0.2);
+  }
+
+  .btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 32px rgba(0,0,0,0.28);
+    background: var(--sand);
+  }
+
+  .btn-secondary {
+    background: rgba(255,255,255,0.1);
+    color: var(--white);
+    border: 1px solid rgba(255,255,255,0.25);
+    box-shadow: 0 4px 16px rgba(0,0,0,0.15);
+  }
+
+  .btn-secondary:hover {
+    transform: translateY(-2px);
+    background: rgba(255,255,255,0.18);
+    box-shadow: 0 8px 28px rgba(0,0,0,0.2);
+  }
+
+  .btn-label {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 3px;
+  }
+
+  .btn-sublabel {
+    font-size: 0.6rem;
+    letter-spacing: 2px;
+    opacity: 0.55;
+    font-weight: 400;
+    text-transform: uppercase;
+  }
+
+  .btn-arrow {
+    font-size: 1.1rem;
+    opacity: 0.5;
+    transition: opacity 0.18s ease, transform 0.18s ease;
+  }
+
+  .btn:hover .btn-arrow {
+    opacity: 1;
+    transform: translateX(3px);
+  }
+
+  .footer {
+    position: absolute;
+    bottom: 28px;
+    left: 0; right: 0;
+    text-align: center;
+    font-size: 0.6rem;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    opacity: 0.3;
+  }
+</style>
+</head>
+<body>
+
+  <!-- wave decorations -->
+  <svg class="wave-top" viewBox="0 0 1440 120" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none" height="120">
+    <path d="M0,60 C240,100 480,20 720,60 C960,100 1200,20 1440,60 L1440,0 L0,0 Z" fill="white"/>
+  </svg>
+  <svg class="wave-bottom" viewBox="0 0 1440 120" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none" height="120">
+    <path d="M0,60 C240,100 480,20 720,60 C960,100 1200,20 1440,60 L1440,0 L0,0 Z" fill="white"/>
+  </svg>
+
+  <div class="container">
+    <div class="eyebrow">A.D. Moyer &nbsp;·&nbsp; Sea Isle City, NJ</div>
+    <div class="title">Shark<em>house</em></div>
+    <div class="subtitle">Annual Company Retreat</div>
+    <div class="dates">June 14 – 18, 2026</div>
+    <div class="rule"></div>
+
+    <div class="buttons">
+      <a href="itinerary_1.html" class="btn btn-primary">
+        <div class="btn-label">
+          <span>Trip Itinerary</span>
+          <span class="btn-sublabel">Schedule &amp; Activities</span>
+        </div>
+        <span class="btn-arrow">→</span>
+      </a>
+      <a href="sharkhouse_rooms.html" class="btn btn-secondary">
+        <div class="btn-label">
+          <span>Room Assignments</span>
+          <span class="btn-sublabel">Who's sleeping where</span>
+        </div>
+        <span class="btn-arrow">→</span>
+      </a>
+    </div>
+  </div>
+
+  <div class="footer">Sharkhouse &nbsp;·&nbsp; 209 40th Street &nbsp;·&nbsp; Sea Isle City, NJ</div>
+
+</body>
+</html>
