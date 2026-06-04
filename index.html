@@ -3,19 +3,14 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Sharkhouse 2026 — A.D. Moyer Retreat</title>
+<title>Sharkhouse 2026 · A.D. Moyer Retreat</title>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
   :root {
     --sand: #f7f2e8;
-    --sand-dark: #ede5d0;
     --ink: #1c1a16;
-    --ink-light: #5a5448;
     --ocean: #2b5f75;
     --ocean-light: #4a8fa8;
-    --coral: #c4614a;
-    --gold: #b8922a;
-    --rule: #d4c9b0;
     --white: #ffffff;
   }
 
@@ -45,12 +40,9 @@
     pointer-events: none;
   }
 
-  /* wave decoration */
   .wave-top, .wave-bottom {
-    position: absolute;
-    left: 0; right: 0;
-    pointer-events: none;
-    opacity: 0.12;
+    position: absolute; left: 0; right: 0;
+    pointer-events: none; opacity: 0.12;
   }
   .wave-top { top: 0; }
   .wave-bottom { bottom: 0; transform: rotate(180deg); }
@@ -64,13 +56,26 @@
     width: 100%;
   }
 
+  .logo-wrap {
+    margin-bottom: 28px;
+  }
+  .logo-wrap img {
+    width: 90px;
+    height: 90px;
+    object-fit: contain;
+    border-radius: 50%;
+    background: white;
+    padding: 8px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.25);
+  }
+
   .eyebrow {
     font-size: 0.65rem;
     font-weight: 600;
     letter-spacing: 5px;
     text-transform: uppercase;
     opacity: 0.6;
-    margin-bottom: 24px;
+    margin-bottom: 20px;
   }
 
   .title {
@@ -102,20 +107,19 @@
     letter-spacing: 4px;
     text-transform: uppercase;
     opacity: 0.5;
-    margin-bottom: 56px;
+    margin-bottom: 48px;
   }
 
   .rule {
-    width: 40px;
-    height: 1px;
+    width: 40px; height: 1px;
     background: rgba(255,255,255,0.3);
-    margin: 0 auto 52px;
+    margin: 0 auto 44px;
   }
 
   .buttons {
     display: flex;
     flex-direction: column;
-    gap: 16px;
+    gap: 14px;
     width: 100%;
     max-width: 340px;
     margin: 0 auto;
@@ -142,7 +146,6 @@
     color: var(--ocean);
     box-shadow: 0 4px 24px rgba(0,0,0,0.2);
   }
-
   .btn-primary:hover {
     transform: translateY(-2px);
     box-shadow: 0 8px 32px rgba(0,0,0,0.28);
@@ -155,7 +158,6 @@
     border: 1px solid rgba(255,255,255,0.25);
     box-shadow: 0 4px 16px rgba(0,0,0,0.15);
   }
-
   .btn-secondary:hover {
     transform: translateY(-2px);
     background: rgba(255,255,255,0.18);
@@ -182,16 +184,11 @@
     opacity: 0.5;
     transition: opacity 0.18s ease, transform 0.18s ease;
   }
-
-  .btn:hover .btn-arrow {
-    opacity: 1;
-    transform: translateX(3px);
-  }
+  .btn:hover .btn-arrow { opacity: 1; transform: translateX(3px); }
 
   .footer {
     position: absolute;
-    bottom: 28px;
-    left: 0; right: 0;
+    bottom: 28px; left: 0; right: 0;
     text-align: center;
     font-size: 0.6rem;
     letter-spacing: 3px;
@@ -202,7 +199,6 @@
 </head>
 <body>
 
-  <!-- wave decorations -->
   <svg class="wave-top" viewBox="0 0 1440 120" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none" height="120">
     <path d="M0,60 C240,100 480,20 720,60 C960,100 1200,20 1440,60 L1440,0 L0,0 Z" fill="white"/>
   </svg>
@@ -211,6 +207,9 @@
   </svg>
 
   <div class="container">
+    <div class="logo-wrap">
+      <img src="data:image/jpeg;base64,/9j/7gAOQWRvYmUAZAAAAAAA/9sAQwAFAwQEBAMFBAQEBQUFBgcMCAcHBwcPCwsJDBEPEhIRDxERExYcFxMUGhURERghGBodHR8fHxMXIiQiHiQcHh8e/8AAFAgBGgEsBEMRAE0RAFkRAEsRAP/EAB8AAAEFAQEBAQEBAAAAAAAAAAABAgMEBQYHCAkKC//EALUQAAIBAwMCBAMFBQQEAAABfQECAwAEEQUSITFBBhNRYQcicRQygZGhCCNCscEVUtHwJDNicoIJChYXGBkaJSYnKCkqNDU2Nzg5OkNERUZHSElKU1RVVldYWVpjZGVmZ2hpanN0dXZ3eHl6g4SFhoeIiYqSk5SVlpeYmZqio6Slpqeoqaqys7S1tre4ubrCw8TFxsfIycrS09TV1tfY2drh4uPk5ebn6Onq8fLz9PX29/j5+v/aAA4EQwBNAFkASwAAPwD7Lr7Lr7Lr7Looooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooryv45fFi28E2x0rSTDca7Km7D8paof43Hcnsv4njr5r8Zfidb+D7c6bphhn1qRNxDcpbKf439T6L+J46+bfGP4mQeELc6bphin1mRNxDcpbKf4nHc+i/ieOvGfEfxvbeGrSSGCWH7WsZeR5D8tumMlm/DoPx+vyvrfxG8UapfNc3mv6tcyZyG+1NGo/wB1VwAPoK+Z9Y+IPiPUbw3F1rWp3D5yG+0sij/dVcAD8K+adY+IPiLUbw3F1rOp3D5yG+0sij/dVcAD8K+UPE/7Rpk1RxaQanqcat/x8Pd+Qre6KAcD64r0H4SfHLXdG1CK2128udW0kkLKk53zwD+8jdWx/dOc9sV3fwt+M+s6VfR2+s3dxqmmEhZUmO+aEf3kbq2P7p/DFd38LvjLrGl3scGsXdxqemEgSpMd80I/vI3Vsf3T+lep/BT45w68ShuLiZIsfabO5IaeFTxvRv4l/wA8V9ZaVqFlqunW+o6dcx3VpcIJIpYzlXU96+n9MvrTU9Pgv7C4juLWdA8UqHKsD3r6c0y+tNSsIL+wuI7i1nQPFKhyGB719E2Vzb3lrHdWsqzQyruR1PBFWasVYqaiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiivMfjj8UbXwRpx07Tnin164jzGh5W2U/8ALRx/Je/0rzr4yfEi28HWBsLBo5tbnTMaHlbdT/y0f+g7/SvO/jF8R7bwfYGxsGjm1qdMxqeVt1P/AC0f+g7/AErkfiJ4xt/Dlk8MMkZvmQtlyNsCY5dv6D+lfGOv6vdarfT3FxcS3Ek0hkmmkbLSsepJr5E17VrnU7yaaaeSZ5XLyyu2WlY9STXyPr+r3Op3k0008kzyuXlldstKx6kmvg341fEy48WX02mabcyHShIWmmJO68fP3j/sZ6Dv1PYVteBfh74h8Y2V7eaZFGkFsh2yTHas8o/5ZIfX36DjPWuU1/xHp2jTwQXTs0kpGVTkov8AePt+prlta16w0maGG5Zi8hGVTkov94+1U/hX8IPGHxG0zU9S0OCGK1so22S3JKLczjnyYz/ex1J4HGetcxLHc2F68M0clvcwOUkjdcMjDggiti1uARHcW8qspAZHU5BB/pWtaz/cuLeQEEblZTkEf4VyFldaz4W8Q+dD5+mapYTFHSRdrxuDhkdT+RBr2H4C/Fi48H3osr5pJ9DnfNxAOWt2P/LVB/Ne/wBevsPwR+KE/ha7+x3jPNo8z5nhHLQMf+WiD+Y7/Xr7B8EvihP4Wu/sd40s2jzPmeEcmAn/AJaIP5jv9evX7D/AGePjFbalZ7X+QKR9usgcmFj/wAtY/VT/wDW69fsHTr201GxhvrG4juLadBJFLG2VdT0INfVdhd21/ZQ3lnPHPbzIHjkRsqynoQa+qbC7tr+zhvLOeOe3mQPHIjZVlPQg19KWtxDdW8dxbyrLFIoZHU5DA96nqepqkooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooryv45fFi28E2x0rSTDca7Mk2YsPy2yk/wCsb+6Ox+vSvMfjF8SrbwXpo07T2jm126TiJuVtlP8Ay0ceo7L3+neuH+Mvxy0bw1pt3puh3kF7rMimPER3R2pP8bHoSOyr17nivm7xb8V7nxFPJcyiJXkbdK8cYUynsSew9BX0hwx9dD4f8P6/qU41Gy028viGJbyrV3GD+H0ryDxJ/wAFAPhLod1LbW+ieLdTMbFfOtLO3SP6Zpyfy/KvF/EP7RniJ0Y2Gl6baKRkAIXYZ+pFef6x8f8AxRcysdPgsrZc5GY94x6cnH6V0xhiHujKXsup7jqn/BQbw5eSb9I+H+rLGcj/AE+eIfpEa29K/wCCifh2SF/7X8Aa9ayDaQtvLDOP+Bfevmew+P8A4pn+a6axkUHJ22pT+RrZtvjVqcqhbqztXC84MQGap0cR2JVaj/mPo/S/+CkXhq4lhGpeBdTtY2BaRorqOXGemOBmvVfBv/BSL4Ra3qEVjrPh/wARaTJIcGd4oZox9SkmfyFfIdp8ZJiMTWMLDPZcVah+KgZstZxp1/gqfYeX/mPf/GP/AAKI+CWlwbNA8N6/q8v9+eCOBP0fP6V1PhX/AIKI/DPxJN5R8L+LbWbkrEba3lQj6eaG/QV+fN9400y5P7nQrSPHQiNia6HwH8WNS8JarDf2FjYxyRkFlSABWxztz6e4ola0tQhXPp9bq7HQT0Pn/UNGv1d2v/D2oWznlmmtXjz+YFcpJG0bt5Ue0Hv/AJ9K8r8f/tJW/ivwVqmh2XhqezGqIEleecttUHcQNoxknHc8Cvob43nYs0S7tyRlj9BXxtqFp5E0scqgOjkFfQivpMPnNKhgrTvY86tlc62KUVvV4kfXNez/AADkGk+OdC1VkLLbX8Mzqv3ioYE49eOM1wz6UPJWbzPmOMiqtlqb6a7/AGcj5uMEdvb3r7jKsXCuo8up83mGGqxhKlU0a2P3S0TU7bV9JtNUsX8y2u4UnhfGNyOoZTg8jgip6+a/gf8AFiz8Q6fbabc6lH9v2BEiLBZJiOhCnJPbp/OvoO3uoJkJglWQKcHBziuvq7mYqRRViq+aCiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiivmb9srUbldZ0awDnyIbKS4Vf9tn25/JF+or57/a1128XVtKsQ58mKzknVf8AbbYB+S/qazkrRbE27I4P9rNBqFxoFkFJnvrsrgdo0UHH/far/gf9nu/v9Hsb3+2vs4uba3laARIcMyKxXPXgn8cV5r4tvTqHiS+vd2ftFy0mfqetdH8I/G9n4V8B6na6tcfaIRqFiUsS3+hMfPUrJL3HTBA9yMjkV8xmE3GU7dD2cJQhUlGUz0TRfCvhrwLouseHvCMlxLqE+0anql1O0kvlqpAhiwflXBI3D5sZzXnPgnwZpnijR9cuvGs0H2e7txa+HNHjuGYWaSH5GZQ38SqDubBG3rwKqap4x0rXfC1ja2drPYX6CG5kaK5m+xrIzFfPji3bVkZQoIHGSPYVd8O+J7fS9Me4n8I6fdX8sJit57xjMltvU7laPcF3biTuxuGAM8HHiqVSD5k73PejKlGyjZ9z3z4A/D/T9C8IWfhO40e3bXbyMz3GoGHdM7FiwO8DkHdj8OK9v0FNVg8G6HpniC6E1xb2iRXN0FjKyMFwSNgCkDoPQYHGK/N34y/E/R/h/oL6kZzf63MDHpemW0mxpGxz0wccZPUnjivuT9kLwj4i8E/BPTfDHiK8N0Y55WtBtGYbdj8ke70/pWtD96+WK2PKxFGME20f/9k=" alt="A.D. Moyer Lumber">
+    </div>
     <div class="eyebrow">A.D. Moyer &nbsp;·&nbsp; Sea Isle City, NJ</div>
     <div class="title">Shark<em>house</em></div>
     <div class="subtitle">Annual Company Retreat</div>
@@ -229,6 +228,13 @@
         <div class="btn-label">
           <span>Room Assignments</span>
           <span class="btn-sublabel">Who's sleeping where</span>
+        </div>
+        <span class="btn-arrow">→</span>
+      </a>
+      <a href="media.html" class="btn btn-secondary">
+        <div class="btn-label">
+          <span>Media</span>
+          <span class="btn-sublabel">Videos &amp; Highlights</span>
         </div>
         <span class="btn-arrow">→</span>
       </a>
