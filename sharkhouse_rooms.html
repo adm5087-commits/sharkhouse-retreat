@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Sharkhouse &middot; Room Assignments</title>
+<title>Sharkhouse · Room Assignments</title>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
   :root {
@@ -28,6 +28,7 @@
     min-height: 100vh;
   }
 
+  /* HEADER */
   header {
     background: var(--ocean);
     color: white;
@@ -62,26 +63,61 @@
     height: 32px; background: var(--sand);
     clip-path: ellipse(55% 100% at 50% 100%);
   }
-  .back-link {
-    position: absolute; top: 18px; left: 20px; z-index: 2;
-    font-size: 0.65rem; font-weight: 600; letter-spacing: 2px;
-    text-transform: uppercase; color: rgba(255,255,255,0.7);
-    text-decoration: none; transition: color 0.15s;
-  }
-  .back-link:hover { color: white; }
-  .back-link::before { content: '\2190 '; }
 
+  /* GUEST POOL */
+  .guest-pool-section {
+    max-width: 1100px; margin: 32px auto 0; padding: 0 24px;
+  }
+  .section-label {
+    font-size: 0.65rem; font-weight: 600; letter-spacing: 3px;
+    text-transform: uppercase; color: var(--ink-light);
+    margin-bottom: 12px;
+  }
+  .guest-pool {
+    display: flex; flex-wrap: wrap; gap: 8px;
+    background: var(--sand-dark);
+    border: 1px solid var(--rule);
+    border-radius: 4px;
+    padding: 14px 16px;
+    min-height: 56px;
+  }
+
+  /* GUEST CHIPS */
+  .guest-chip {
+    display: inline-flex; align-items: center; gap: 6px;
+    background: white;
+    border: 1.5px solid var(--rule);
+    border-radius: 2px;
+    padding: 5px 12px;
+    font-size: 0.8rem; font-weight: 500;
+    cursor: grab;
+    user-select: none;
+    transition: all 0.15s ease;
+    white-space: nowrap;
+  }
+  .guest-chip:hover { border-color: var(--ocean); color: var(--ocean); transform: translateY(-1px); box-shadow: 0 2px 6px rgba(0,0,0,0.1); }
+  .guest-chip.dragging { opacity: 0.4; cursor: grabbing; }
+  .guest-chip.assigned-tiger { background: #fff0ed; border-color: var(--tiger); color: var(--tiger); }
+  .guest-chip.assigned-mako { background: #edf4f7; border-color: var(--mako); color: var(--mako); }
+
+  /* SIDES */
   .sides-grid {
-    max-width: 1100px; margin: 36px auto 60px;
+    max-width: 1100px; margin: 28px auto 60px;
     padding: 0 24px;
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 24px;
   }
-  @media (max-width: 720px) { .sides-grid { grid-template-columns: 1fr; } }
 
-  .side-card { border: 2px solid var(--rule); border-radius: 4px; overflow: hidden; }
-  .side-header { padding: 14px 20px; display: flex; align-items: center; gap: 10px; }
+  .side-card {
+    border: 2px solid var(--rule);
+    border-radius: 4px;
+    overflow: hidden;
+  }
+  .side-header {
+    padding: 14px 20px;
+    display: flex; align-items: center; gap: 10px;
+  }
   .side-tiger .side-header { background: var(--tiger); color: white; }
   .side-mako .side-header { background: var(--mako); color: white; }
   .side-name {
@@ -93,58 +129,166 @@
     text-transform: uppercase; opacity: 0.7;
   }
 
-  .floor-section { border-bottom: 1px solid var(--rule); }
+  /* FLOOR sections */
+  .floor-section {
+    border-bottom: 1px solid var(--rule);
+  }
   .floor-section:last-child { border-bottom: none; }
   .floor-label {
     font-size: 0.6rem; font-weight: 600; letter-spacing: 3px;
     text-transform: uppercase; color: var(--ink-light);
-    padding: 10px 16px 4px; background: rgba(0,0,0,0.02);
+    padding: 10px 16px 4px;
+    background: rgba(0,0,0,0.02);
   }
 
+  /* ROOM ROW */
   .room-row {
     display: flex; align-items: flex-start; gap: 12px;
-    padding: 10px 16px; border-top: 1px solid var(--rule);
+    padding: 10px 16px;
+    border-top: 1px solid var(--rule);
   }
   .room-info { flex: 0 0 auto; width: 140px; }
   .room-name { font-size: 0.8rem; font-weight: 500; color: var(--ink); line-height: 1.2; }
   .room-detail { font-size: 0.68rem; color: var(--ink-light); margin-top: 2px; }
-
-  .guests {
-    flex: 1; display: flex; flex-wrap: wrap; gap: 6px;
-    align-content: flex-start; padding: 4px 0;
+  .room-capacity {
+    font-size: 0.6rem; font-weight: 600; letter-spacing: 1px;
+    color: var(--ink-light); margin-top: 3px;
   }
-  .guest-chip {
-    display: inline-flex; align-items: center;
-    border: 1.5px solid var(--rule); border-radius: 2px;
-    padding: 4px 10px; font-size: 0.75rem; font-weight: 500; white-space: nowrap;
-  }
-  .side-tiger .guest-chip { background: #fff0ed; border-color: var(--tiger); color: var(--tiger); }
-  .side-mako .guest-chip { background: #edf4f7; border-color: var(--mako); color: var(--mako); }
-  .guests-empty { font-size: 0.72rem; color: #ccc; font-style: italic; padding: 4px 0; }
 
-  footer {
-    text-align: center;
-    font-size: 0.62rem; letter-spacing: 3px; text-transform: uppercase;
-    color: var(--ink-light); padding: 24px; border-top: 1px solid var(--rule); margin-top: 16px;
+  .room-drop-zone {
+    flex: 1;
+    min-height: 38px;
+    border: 1.5px dashed var(--rule);
+    border-radius: 3px;
+    padding: 6px 8px;
+    display: flex; flex-wrap: wrap; gap: 6px;
+    align-content: flex-start;
+    transition: all 0.15s ease;
+  }
+  .room-drop-zone.drag-over {
+    border-color: var(--ocean-light);
+    background: rgba(74,143,168,0.06);
+  }
+  .side-tiger .room-drop-zone.drag-over {
+    border-color: var(--tiger);
+    background: rgba(196,97,74,0.05);
+  }
+  .side-mako .room-drop-zone.drag-over {
+    border-color: var(--mako);
+    background: rgba(43,95,117,0.05);
+  }
+  .room-drop-zone .guest-chip { font-size: 0.72rem; padding: 3px 9px; }
+
+  /* EXPORT */
+  .export-bar {
+    max-width: 1100px; margin: 0 auto 40px; padding: 0 24px;
+    display: flex; gap: 12px; align-items: center; justify-content: flex-end;
+  }
+  .btn {
+    font-family: 'Jost', sans-serif;
+    font-size: 0.72rem; font-weight: 600; letter-spacing: 2px;
+    text-transform: uppercase;
+    padding: 10px 22px;
+    border: 1.5px solid var(--ink);
+    background: transparent;
+    color: var(--ink);
+    border-radius: 2px;
+    cursor: pointer;
+    transition: all 0.15s;
+  }
+  .btn:hover { background: var(--ink); color: var(--sand); }
+  .btn.primary { background: var(--ocean); border-color: var(--ocean); color: white; }
+  .btn.primary:hover { background: #1e4a5c; }
+
+  .unassigned-count {
+    font-size: 0.75rem; color: var(--ink-light);
+    margin-right: auto;
+  }
+  .unassigned-count span { font-weight: 600; color: var(--coral); }
+
+  /* ── NAV BAR ── */
+  .site-nav {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: var(--ocean);
+    border-bottom: 1px solid rgba(255,255,255,0.12);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 0 16px;
+    height: 48px;
+  }
+
+  .nav-link {
+    font-family: 'Jost', sans-serif;
+    font-size: 0.7rem;
+    font-weight: 600;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.72);
+    text-decoration: none;
+    padding: 6px 14px;
+    border-radius: 2px;
+    transition: background 0.15s, color 0.15s;
+    white-space: nowrap;
+  }
+
+  .nav-link:hover { background: rgba(255,255,255,0.12); color: white; }
+  .nav-link.active { color: white; background: rgba(255,255,255,0.15); }
+  .nav-dot { color: rgba(255,255,255,0.3); font-size: 0.5rem; }
+
+  @media (max-width: 480px) {
+    .nav-link { font-size: 0.62rem; letter-spacing: 1.5px; padding: 6px 10px; }
+    .nav-dot { display: none; }
+    .site-nav { gap: 4px; }
+  }
+
+  /* ── MOBILE OVERRIDES ── */
+  @media (max-width: 720px) {
+    .sides-grid { grid-template-columns: 1fr; padding: 0 14px; }
+    .guest-pool-section { padding: 0 14px; }
+    .export-bar { flex-wrap: wrap; gap: 8px; padding: 12px 14px; }
+    .unassigned-count { width: 100%; }
+    header { padding: 40px 20px 32px; }
   }
 </style>
 </head>
 <body>
 
+<nav class="site-nav">
+  <a href="index.html" class="nav-link">Home</a>
+  <span class="nav-dot">●</span>
+  <a href="itinerary_1.html" class="nav-link">Itinerary</a>
+  <span class="nav-dot">●</span>
+  <a href="sharkhouse_rooms_static.html" class="nav-link active">Rooms</a>
+  <span class="nav-dot">●</span>
+  <a href="media.html" class="nav-link">Media</a>
+</nav>
+
 <header>
-  <a href="index.html" class="back-link">Home</a>
   <div class="header-inner">
-    <div class="header-eyebrow">Sea Isle City &middot; June 2026</div>
+    <div class="header-eyebrow">Sea Isle City · June 2026</div>
     <div class="header-title">Sharkhouse</div>
     <div class="header-sub">Room Assignments</div>
   </div>
   <div class="header-wave"></div>
 </header>
 
+<!-- GUEST POOL -->
+<div class="guest-pool-section">
+  <div class="section-label">Unassigned Guests — drag to a room</div>
+  <div class="guest-pool" id="pool" data-zone="pool">
+    <!-- chips inserted by JS -->
+  </div>
+</div>
+
+<!-- SIDES -->
 <div class="sides-grid">
 
   <!-- TIGER SIDE -->
-  <div class="side-card side-tiger">
+  <div class="side-card side-tiger" id="tiger">
     <div class="side-header">
       <div>
         <div class="side-badge">Tiger Side</div>
@@ -158,8 +302,9 @@
         <div class="room-info">
           <div class="room-name">Master Suite</div>
           <div class="room-detail">Attached bath</div>
+          <div class="room-capacity">Up to 2</div>
         </div>
-        <div class="guests"><span class="guest-chip">Ryan</span><span class="guest-chip">Thalia</span></div>
+        <div class="room-drop-zone" data-room="tiger-master" data-max="2"></div>
       </div>
     </div>
 
@@ -169,36 +314,41 @@
         <div class="room-info">
           <div class="room-name">Primary</div>
           <div class="room-detail">Private room</div>
+          <div class="room-capacity">Up to 2</div>
         </div>
-        <div class="guests"><span class="guest-chip">Steph</span><span class="guest-chip">Erik</span></div>
+        <div class="room-drop-zone" data-room="tiger-primary" data-max="2"></div>
       </div>
       <div class="room-row">
         <div class="room-info">
           <div class="room-name">King</div>
           <div class="room-detail">2nd floor</div>
+          <div class="room-capacity">Up to 2</div>
         </div>
-        <div class="guests"><span class="guest-chip">Corey</span><span class="guest-chip">Jenna</span></div>
+        <div class="room-drop-zone" data-room="tiger-king" data-max="2"></div>
       </div>
       <div class="room-row">
         <div class="room-info">
           <div class="room-name">Twin over Full #1</div>
           <div class="room-detail">Bunk style</div>
+          <div class="room-capacity">Up to 3</div>
         </div>
-        <div class="guests"><span class="guest-chip">Charlotte</span></div>
+        <div class="room-drop-zone" data-room="tiger-tof1" data-max="3"></div>
       </div>
       <div class="room-row">
         <div class="room-info">
           <div class="room-name">Twin over Full #2</div>
           <div class="room-detail">Bunk style</div>
+          <div class="room-capacity">Up to 3</div>
         </div>
-        <div class="guests"><span class="guest-chip">Mike</span></div>
+        <div class="room-drop-zone" data-room="tiger-tof2" data-max="3"></div>
       </div>
       <div class="room-row">
         <div class="room-info">
           <div class="room-name">Full Bath</div>
-          <div class="room-detail">Shared &middot; 2nd floor</div>
+          <div class="room-detail">Shared · 2nd floor</div>
+          <div class="room-capacity">–</div>
         </div>
-        <div style="flex:1; padding:6px 0; font-size:0.7rem; color:var(--ink-light); font-style:italic;">Shared by King &amp; Twin rooms</div>
+        <div style="flex:1; padding:6px 0; font-size:0.7rem; color:var(--ink-light); font-style:italic;">Shared by King & Twin rooms</div>
       </div>
     </div>
 
@@ -208,14 +358,15 @@
         <div class="room-info">
           <div class="room-name">Flex Room</div>
           <div class="room-detail">Attached bath</div>
+          <div class="room-capacity">Up to 4</div>
         </div>
-        <div class="guests"><span class="guest-chip">Doug</span></div>
+        <div class="room-drop-zone" data-room="tiger-flex" data-max="4"></div>
       </div>
     </div>
   </div>
 
   <!-- MAKO SIDE -->
-  <div class="side-card side-mako">
+  <div class="side-card side-mako" id="mako">
     <div class="side-header">
       <div>
         <div class="side-badge">Mako Side</div>
@@ -229,8 +380,9 @@
         <div class="room-info">
           <div class="room-name">Master Suite</div>
           <div class="room-detail">Attached bath</div>
+          <div class="room-capacity">Up to 2</div>
         </div>
-        <div class="guests"><span class="guest-chip">Clint</span><span class="guest-chip">Andrea</span></div>
+        <div class="room-drop-zone" data-room="mako-master" data-max="2"></div>
       </div>
     </div>
 
@@ -240,36 +392,41 @@
         <div class="room-info">
           <div class="room-name">Primary</div>
           <div class="room-detail">Private room</div>
+          <div class="room-capacity">Up to 2</div>
         </div>
-        <div class="guests"><span class="guest-chip">Alex</span><span class="guest-chip">Jackie</span></div>
+        <div class="room-drop-zone" data-room="mako-primary" data-max="2"></div>
       </div>
       <div class="room-row">
         <div class="room-info">
           <div class="room-name">King</div>
           <div class="room-detail">2nd floor</div>
+          <div class="room-capacity">Up to 2</div>
         </div>
-        <div class="guests"><span class="guest-chip">Scott</span></div>
+        <div class="room-drop-zone" data-room="mako-king" data-max="2"></div>
       </div>
       <div class="room-row">
         <div class="room-info">
           <div class="room-name">Twin over Full #1</div>
           <div class="room-detail">Bunk style</div>
+          <div class="room-capacity">Up to 3</div>
         </div>
-        <div class="guests"><span class="guest-chip">Emalyn</span><span class="guest-chip">Luca</span><span class="guest-chip">Aven</span></div>
+        <div class="room-drop-zone" data-room="mako-tof1" data-max="3"></div>
       </div>
       <div class="room-row">
         <div class="room-info">
           <div class="room-name">Twin over Full #2</div>
           <div class="room-detail">Bunk style</div>
+          <div class="room-capacity">Up to 3</div>
         </div>
-        <div class="guests"><span class="guest-chip">Terry</span></div>
+        <div class="room-drop-zone" data-room="mako-tof2" data-max="3"></div>
       </div>
       <div class="room-row">
         <div class="room-info">
           <div class="room-name">Full Bath</div>
-          <div class="room-detail">Shared &middot; 2nd floor</div>
+          <div class="room-detail">Shared · 2nd floor</div>
+          <div class="room-capacity">–</div>
         </div>
-        <div style="flex:1; padding:6px 0; font-size:0.7rem; color:var(--ink-light); font-style:italic;">Shared by King &amp; Twin rooms</div>
+        <div style="flex:1; padding:6px 0; font-size:0.7rem; color:var(--ink-light); font-style:italic;">Shared by King & Twin rooms</div>
       </div>
     </div>
 
@@ -279,15 +436,266 @@
         <div class="room-info">
           <div class="room-name">Flex Room</div>
           <div class="room-detail">Attached bath</div>
+          <div class="room-capacity">Up to 4</div>
         </div>
-        <div class="guests"><span class="guests-empty">&mdash;</span></div>
+        <div class="room-drop-zone" data-room="mako-flex" data-max="4"></div>
       </div>
     </div>
   </div>
 
 </div>
 
-<footer>Sharkhouse &nbsp;&middot;&nbsp; 209 40th Street &nbsp;&middot;&nbsp; Sea Isle City, NJ &nbsp;&middot;&nbsp; June 14&ndash;18, 2026</footer>
+<!-- EXPORT BAR -->
+<div class="export-bar">
+  <div class="unassigned-count" id="unassignedCount"></div>
+  <button class="btn" onclick="clearAll()">Clear All</button>
+  <button class="btn primary" onclick="exportHTML()">⬇ Download Summary</button>
+</div>
 
+<script>
+const GUESTS = [
+  'Scott','Terry','Mike','Corey','Jenna','Charlotte',
+  'Alex','Jackie','Emalyn','Luca','Aven',
+  'Erik','Steph','Clint','Andrea','Ryan','Thalia','Doug'
+];
+
+const pool = document.getElementById('pool');
+const dropZones = document.querySelectorAll('.room-drop-zone');
+let draggedChip = null;
+let dragSource = null;
+
+// In-memory state only (no localStorage needed)
+function saveState() { /* state lives in the DOM */ }
+
+function makeSideClass(zone) {
+  if (!zone || zone === 'pool') return '';
+  if (zone.startsWith('tiger')) return 'assigned-tiger';
+  if (zone.startsWith('mako')) return 'assigned-mako';
+  return '';
+}
+
+function createChip(name, zone) {
+  const chip = document.createElement('div');
+  chip.className = 'guest-chip' + (zone && zone !== 'pool' ? ' ' + makeSideClass(zone) : '');
+  chip.dataset.guest = name;
+  chip.textContent = name;
+  chip.draggable = true;
+  chip.addEventListener('dragstart', onDragStart);
+  chip.addEventListener('dragend', onDragEnd);
+  return chip;
+}
+
+const PRESET = {
+  'tiger-master':  ['Ryan', 'Thalia'],
+  'tiger-primary': ['Steph', 'Erik'],
+  'tiger-king':    ['Corey', 'Jenna'],
+  'tiger-tof1':    ['Charlotte'],
+  'tiger-tof2':    ['Mike'],
+  'tiger-flex':    ['Doug'],
+  'mako-master':   ['Clint', 'Andrea'],
+  'mako-primary':  ['Alex', 'Jackie'],
+  'mako-king':     ['Scott'],
+  'mako-tof1':     ['Emalyn', 'Luca', 'Aven'],
+  'mako-tof2':     ['Terry'],
+  'mako-flex':     [],
+};
+
+function init() {
+  const assigned = new Set(Object.values(PRESET).flat());
+  dropZones.forEach(z => {
+    const guests = PRESET[z.dataset.room] || [];
+    guests.forEach(name => z.appendChild(createChip(name, z.dataset.room)));
+  });
+  GUESTS.forEach(name => {
+    if (!assigned.has(name)) pool.appendChild(createChip(name, 'pool'));
+  });
+  updateCount();
+}
+
+function onDragStart(e) {
+  draggedChip = this;
+  dragSource = this.parentElement;
+  setTimeout(() => this.classList.add('dragging'), 0);
+  e.dataTransfer.effectAllowed = 'move';
+}
+function onDragEnd(e) {
+  draggedChip && draggedChip.classList.remove('dragging');
+  draggedChip = null; dragSource = null;
+  dropZones.forEach(z => z.classList.remove('drag-over'));
+}
+
+dropZones.forEach(zone => {
+  zone.addEventListener('dragover', e => {
+    e.preventDefault();
+    zone.classList.add('drag-over');
+    e.dataTransfer.dropEffect = 'move';
+  });
+  zone.addEventListener('dragleave', () => zone.classList.remove('drag-over'));
+  zone.addEventListener('drop', e => {
+    e.preventDefault();
+    zone.classList.remove('drag-over');
+    if (!draggedChip) return;
+    const max = parseInt(zone.dataset.max) || 99;
+    const current = zone.querySelectorAll('.guest-chip').length;
+    if (current >= max) {
+      // Flash red
+      zone.style.borderColor = '#c00';
+      setTimeout(() => zone.style.borderColor = '', 600);
+      return;
+    }
+    // Update chip class
+    draggedChip.className = 'guest-chip ' + makeSideClass(zone.dataset.room);
+    draggedChip.draggable = true;
+    zone.appendChild(draggedChip);
+    saveState();
+    updateCount();
+  });
+});
+
+// Pool also accepts drops (return)
+pool.addEventListener('dragover', e => { e.preventDefault(); e.dataTransfer.dropEffect = 'move'; });
+pool.addEventListener('drop', e => {
+  e.preventDefault();
+  if (!draggedChip) return;
+  draggedChip.className = 'guest-chip';
+  pool.appendChild(draggedChip);
+  saveState();
+  updateCount();
+});
+
+function updateCount() {
+  const n = pool.querySelectorAll('.guest-chip').length;
+  const el = document.getElementById('unassignedCount');
+  el.innerHTML = n === 0
+    ? '✓ All guests assigned'
+    : `<span>${n}</span> guest${n !== 1 ? 's' : ''} unassigned`;
+}
+
+function clearAll() {
+  if (!confirm('Clear all room assignments?')) return;
+  dropZones.forEach(z => {
+    [...z.querySelectorAll('.guest-chip')].forEach(c => {
+      c.className = 'guest-chip';
+      pool.appendChild(c);
+    });
+  });
+  updateCount();
+}
+
+function exportHTML() {
+  // Collect current assignments
+  const rooms = [
+    { id: 'tiger-master',  label: 'Master Suite',      side: 'Tiger', floor: '3rd Floor', detail: 'Attached bath' },
+    { id: 'tiger-primary', label: 'Primary',            side: 'Tiger', floor: '2nd Floor', detail: 'Private room' },
+    { id: 'tiger-king',    label: 'King',               side: 'Tiger', floor: '2nd Floor', detail: '2nd floor' },
+    { id: 'tiger-tof1',    label: 'Twin over Full #1',  side: 'Tiger', floor: '2nd Floor', detail: 'Bunk style' },
+    { id: 'tiger-tof2',    label: 'Twin over Full #2',  side: 'Tiger', floor: '2nd Floor', detail: 'Bunk style' },
+    { id: 'tiger-flex',    label: 'Flex Room',          side: 'Tiger', floor: '1st Floor', detail: 'Attached bath' },
+    { id: 'mako-master',   label: 'Master Suite',       side: 'Mako',  floor: '3rd Floor', detail: 'Attached bath' },
+    { id: 'mako-primary',  label: 'Primary',            side: 'Mako',  floor: '2nd Floor', detail: 'Private room' },
+    { id: 'mako-king',     label: 'King',               side: 'Mako',  floor: '2nd Floor', detail: '2nd floor' },
+    { id: 'mako-tof1',     label: 'Twin over Full #1',  side: 'Mako',  floor: '2nd Floor', detail: 'Bunk style' },
+    { id: 'mako-tof2',     label: 'Twin over Full #2',  side: 'Mako',  floor: '2nd Floor', detail: 'Bunk style' },
+    { id: 'mako-flex',     label: 'Flex Room',          side: 'Mako',  floor: '1st Floor', detail: 'Attached bath' },
+  ];
+
+  function buildSideRows(side) {
+    const sideRooms = rooms.filter(r => r.side === side);
+    let html = '';
+    let lastFloor = '';
+    for (const r of sideRooms) {
+      if (r.floor !== lastFloor) {
+        if (lastFloor) html += '</tbody></table>';
+        html += `<div class="floor-label">${r.floor}</div><table><tbody>`;
+        lastFloor = r.floor;
+      }
+      const zone = document.querySelector(`[data-room="${r.id}"]`);
+      const guests = zone ? [...zone.querySelectorAll('.guest-chip')].map(c => c.dataset.guest) : [];
+      const guestStr = guests.length ? guests.join(', ') : '<span class="empty">—</span>';
+      html += `<tr><td class="rname">${r.label}</td><td class="rdetail">${r.detail}</td><td class="rguests">${guestStr}</td></tr>`;
+    }
+    if (lastFloor) html += '</tbody></table>';
+    return html;
+  }
+
+  const unassigned = [...pool.querySelectorAll('.guest-chip')].map(c => c.dataset.guest);
+  const unassignedRow = unassigned.length
+    ? `<div class="unassigned-section"><strong>Unassigned:</strong> ${unassigned.join(', ')}</div>`
+    : '';
+
+  const html = `<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Sharkhouse · Room Assignments</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Jost', sans-serif; background: #f7f2e8; color: #1c1a16; padding: 0; }
+  header { background: #2b5f75; color: white; text-align: center; padding: 36px 24px 28px; }
+  .eyebrow { font-size: 0.62rem; font-weight: 600; letter-spacing: 4px; text-transform: uppercase; opacity: 0.7; margin-bottom: 6px; }
+  h1 { font-family: 'Cormorant Garamond', serif; font-size: 3.5rem; font-weight: 300; line-height: 1; letter-spacing: -1px; }
+  .sub { font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: 1.1rem; opacity: 0.75; margin-top: 4px; }
+  .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; max-width: 960px; margin: 32px auto; padding: 0 24px; }
+  .side { border: 2px solid #d4c9b0; border-radius: 4px; overflow: hidden; }
+  .side-head { padding: 12px 18px; color: white; }
+  .tiger .side-head { background: #c4614a; }
+  .mako .side-head { background: #2b5f75; }
+  .side-head .badge { font-size: 0.58rem; font-weight: 600; letter-spacing: 3px; text-transform: uppercase; opacity: 0.75; }
+  .side-head .name { font-family: 'Cormorant Garamond', serif; font-size: 1.5rem; font-weight: 300; }
+  .floor-label { font-size: 0.58rem; font-weight: 600; letter-spacing: 3px; text-transform: uppercase; color: #5a5448; padding: 8px 16px 4px; background: rgba(0,0,0,0.02); border-top: 1px solid #d4c9b0; }
+  table { width: 100%; border-collapse: collapse; }
+  tr { border-top: 1px solid #d4c9b0; }
+  td { padding: 8px 12px; font-size: 0.78rem; vertical-align: top; }
+  .rname { font-weight: 500; width: 130px; }
+  .rdetail { color: #5a5448; font-size: 0.68rem; width: 90px; }
+  .rguests { color: #1c1a16; }
+  .empty { color: #bbb; }
+  .unassigned-section { max-width: 960px; margin: 0 auto 32px; padding: 0 24px; font-size: 0.8rem; color: #c4614a; }
+  footer { text-align: center; font-size: 0.65rem; letter-spacing: 2px; text-transform: uppercase; color: #5a5448; padding: 24px; border-top: 1px solid #d4c9b0; margin-top: 16px; }
+  @media print { body { background: white; } header { -webkit-print-color-adjust: exact; print-color-adjust: exact; } .side-head { -webkit-print-color-adjust: exact; print-color-adjust: exact; } }
+</style>
+</head>
+<body>
+<header>
+  <div class="eyebrow">Sea Isle City · June 2026</div>
+  <h1>Sharkhouse</h1>
+  <div class="sub">Room Assignments</div>
+</header>
+<div class="grid">
+  <div class="side tiger">
+    <div class="side-head"><div class="badge">Tiger Side</div><div class="name">Tiger</div></div>
+    ${buildSideRows('Tiger')}
+  </div>
+  <div class="side mako">
+    <div class="side-head"><div class="badge">Mako Side</div><div class="name">Mako</div></div>
+    ${buildSideRows('Mako')}
+  </div>
+</div>
+${unassignedRow}
+<footer>Sharkhouse &nbsp;·&nbsp; Sea Isle City, NJ &nbsp;·&nbsp; June 14–18, 2026</footer>
+</body>
+</html>`;
+
+  const blob = new Blob([html], { type: 'text/html' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = 'Sharkhouse_Room_Assignments.html';
+  a.click();
+  URL.revokeObjectURL(url);
+}
+
+init();
+</script>
+
+<style>
+@media print {
+  .guest-pool-section, .export-bar, .unassigned-count { display: none; }
+  header { padding: 24px; }
+  .room-drop-zone { border-style: solid; min-height: 28px; }
+  body { background: white; }
+}
+</style>
 </body>
 </html>
