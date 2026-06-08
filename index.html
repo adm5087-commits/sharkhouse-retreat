@@ -16,6 +16,10 @@
 
   * { box-sizing: border-box; margin: 0; padding: 0; }
 
+  html, body {
+    min-height: 100%;
+  }
+
   body {
     background: var(--ocean);
     font-family: 'Jost', sans-serif;
@@ -24,25 +28,27 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
     position: relative;
-    overflow: hidden;
+    overflow-x: hidden;
+    overflow-y: auto;
   }
 
   body::before {
     content: '';
-    position: absolute;
+    position: fixed;
     inset: 0;
     background:
       radial-gradient(ellipse at 15% 85%, rgba(74,143,168,0.45) 0%, transparent 55%),
       radial-gradient(ellipse at 85% 15%, rgba(27,60,75,0.7) 0%, transparent 55%),
       radial-gradient(ellipse at 50% 50%, rgba(43,95,117,0.3) 0%, transparent 70%);
     pointer-events: none;
+    z-index: 0;
   }
 
   .wave-top, .wave-bottom {
-    position: absolute; left: 0; right: 0;
+    position: fixed; left: 0; right: 0;
     pointer-events: none; opacity: 0.12;
+    z-index: 0;
   }
   .wave-top { top: 0; }
   .wave-bottom { bottom: 0; transform: rotate(180deg); }
@@ -51,21 +57,27 @@
     position: relative;
     z-index: 1;
     text-align: center;
-    padding: 40px 24px;
+    padding: 48px 24px 80px;
     max-width: 560px;
     width: 100%;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
   }
 
   .logo-wrap {
     margin-bottom: 28px;
   }
   .logo-wrap img {
-    width: 90px;
-    height: 90px;
+    width: 120px;
+    height: 120px;
     object-fit: contain;
+    object-position: center;
     border-radius: 50%;
     background: white;
-    padding: 8px;
+    padding: 12px;
     box-shadow: 0 4px 20px rgba(0,0,0,0.25);
   }
 
@@ -187,9 +199,11 @@
   .btn:hover .btn-arrow { opacity: 1; transform: translateX(3px); }
 
   .footer {
-    position: absolute;
-    bottom: 28px; left: 0; right: 0;
+    position: relative;
+    z-index: 1;
+    width: 100%;
     text-align: center;
+    padding: 20px 24px 28px;
     font-size: 0.6rem;
     letter-spacing: 3px;
     text-transform: uppercase;
