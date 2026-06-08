@@ -16,9 +16,7 @@
 
   * { box-sizing: border-box; margin: 0; padding: 0; }
 
-  html, body {
-    min-height: 100%;
-  }
+  html, body { min-height: 100%; }
 
   body {
     background: var(--ocean);
@@ -28,9 +26,9 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    position: relative;
     overflow-x: hidden;
     overflow-y: auto;
+    position: relative;
   }
 
   body::before {
@@ -47,8 +45,7 @@
 
   .wave-top, .wave-bottom {
     position: fixed; left: 0; right: 0;
-    pointer-events: none; opacity: 0.12;
-    z-index: 0;
+    pointer-events: none; opacity: 0.12; z-index: 0;
   }
   .wave-top { top: 0; }
   .wave-bottom { bottom: 0; transform: rotate(180deg); }
@@ -57,7 +54,7 @@
     position: relative;
     z-index: 1;
     text-align: center;
-    padding: 48px 24px 80px;
+    padding: 48px 24px 60px;
     max-width: 560px;
     width: 100%;
     flex: 1;
@@ -67,18 +64,15 @@
     justify-content: center;
   }
 
+  /* LOGO — no circle, just the badge big and proud */
   .logo-wrap {
-    margin-bottom: 28px;
+    margin-bottom: 32px;
   }
   .logo-wrap img {
-    width: 120px;
-    height: 120px;
+    width: 180px;
+    height: auto;
     object-fit: contain;
-    object-position: center;
-    border-radius: 50%;
-    background: white;
-    padding: 12px;
-    box-shadow: 0 4px 20px rgba(0,0,0,0.25);
+    filter: drop-shadow(0 4px 16px rgba(0,0,0,0.35));
   }
 
   .eyebrow {
@@ -238,12 +232,26 @@
         </div>
         <span class="btn-arrow">→</span>
       </a>
-      <a href="sharkhouse_rooms.html" class="btn btn-secondary">
+      <a href="sharkhouse_rooms_static.html" class="btn btn-secondary">
         <div class="btn-label">
           <span>Room Assignments</span>
           <span class="btn-sublabel">Who's sleeping where</span>
         </div>
         <span class="btn-arrow">→</span>
+      </a>
+      <a href="https://sharkhousenj.com/welcome/tiger" target="_blank" class="btn btn-secondary">
+        <div class="btn-label">
+          <span>Tiger</span>
+          <span class="btn-sublabel">Property Profile</span>
+        </div>
+        <span class="btn-arrow">↗</span>
+      </a>
+      <a href="https://sharkhousenj.com/welcome/mako" target="_blank" class="btn btn-secondary">
+        <div class="btn-label">
+          <span>Mako</span>
+          <span class="btn-sublabel">Property Profile</span>
+        </div>
+        <span class="btn-arrow">↗</span>
       </a>
       <a href="media.html" class="btn btn-secondary">
         <div class="btn-label">
