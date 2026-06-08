@@ -52,12 +52,18 @@
   }
 
   /* LOGO — big badge, no circle, white shows through via mix-blend-mode */
-  .logo-wrap { margin-bottom: 32px; }
+  .logo-wrap {
+    margin-bottom: 32px;
+    background: white;
+    border-radius: 12px;
+    padding: 16px 28px;
+    display: inline-block;
+    box-shadow: 0 4px 24px rgba(0,0,0,0.3);
+  }
   .logo-wrap img {
-    width: 220px;
+    width: 260px;
     height: auto;
-    mix-blend-mode: screen;
-    filter: drop-shadow(0 2px 12px rgba(0,0,0,0.4));
+    display: block;
   }
 
   .eyebrow {
@@ -129,7 +135,7 @@
 
   <div class="container">
     <div class="logo-wrap">
-      <img src="admoyer_logo.png" alt="A.D. Moyer Lumber">
+      <img src="AD_MOYER_WIDE_LOGO-01.jpg" alt="A.D. Moyer Lumber">
     </div>
     <div class="eyebrow">A.D. Moyer &nbsp;·&nbsp; Sea Isle City, NJ</div>
     <div class="title">Shark<em>house</em></div>
