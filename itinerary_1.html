@@ -368,37 +368,28 @@
 
   /* ── NAV BAR ── */
   .site-nav {
-    background: rgba(0,0,0,0.25);
-    backdrop-filter: blur(4px);
+    background: var(--ocean);
     display: flex;
     justify-content: center;
-    gap: 8px;
-    padding: 14px 24px;
-    flex-wrap: wrap;
+    gap: 0;
+    padding: 0;
+    position: sticky;
+    top: 0;
+    z-index: 100;
   }
   .site-nav a {
-    color: rgba(255,255,255,0.85);
+    color: rgba(255,255,255,0.7);
     text-decoration: none;
     font-family: 'Jost', sans-serif;
-    font-size: 0.72rem;
-    font-weight: 500;
-    letter-spacing: 2px;
+    font-size: 0.65rem;
+    font-weight: 600;
+    letter-spacing: 3px;
     text-transform: uppercase;
-    padding: 6px 16px;
-    border: 1px solid rgba(255,255,255,0.2);
-    border-radius: 2px;
-    transition: all 0.2s;
+    padding: 14px 16px;
+    transition: color 0.15s ease, background 0.15s ease;
   }
-  .site-nav a:hover {
-    background: rgba(255,255,255,0.12);
-    border-color: rgba(255,255,255,0.5);
-    color: white;
-  }
-  .site-nav a.active {
-    background: rgba(255,255,255,0.15);
-    border-color: rgba(255,255,255,0.5);
-    color: white;
-  }
+  .site-nav a:hover { color: white; background: rgba(255,255,255,0.08); }
+  .site-nav a.active { color: white; border-bottom: 2px solid rgba(255,255,255,0.5); }
 
 </style>
 </head>
